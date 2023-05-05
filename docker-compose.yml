@@ -41,6 +41,24 @@ services:
     volumes:
       - data:/bitnami/mongodb
 
+  challenge_db:
+    container_name: challenge_db
+    restart: always
+    build:
+      context: docker/mongo/
+      dockerfile: Dockerfile
+    ports:
+      - "27018:27017"
+    networks:
+     - experiencenet
+    environment:
+      MONGODB_ROOT_PASSWORD: 123456
+      MONGODB_USERNAME: experience
+      MONGODB_PASSWORD: experience
+      MONGODB_DATABASE: challenge
+    volumes:
+      - data:/bitnami/mongodb
+
   mail:
     container_name: experience_mail_1
     restart: always
