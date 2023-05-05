@@ -14,7 +14,6 @@
     "command": "ts-node src/command.ts",
     "cpy-ci": "cp .env.dev .env",
     "dev": "nodemon",
-    "dev-challenge": "nodemon index.js",
     "login-infisical": "infisical login",
     "pull:env": "infisical pull",
     "docker-command": "docker-compose exec node pnpm command",
