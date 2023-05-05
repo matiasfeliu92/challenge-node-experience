@@ -7,7 +7,7 @@
     "watch": [
       "src/*"
     ],
-    "exec": "node src/Challenge/index.js",
+    "exec": "node Challenge/index.js",
     "legacyWatch": true,
     "ext": "js,ts,json,hbs"
   }
