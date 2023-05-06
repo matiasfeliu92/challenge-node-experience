@@ -12,3 +12,5 @@ class Product extends Base implements IProductDomain {
         super()
     }
 }
+
+export default Product

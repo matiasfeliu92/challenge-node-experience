@@ -1,4 +1,5 @@
 import { IProductDomain } from "Product/Domain/Entities/IProductDomain";
+import Product from "Product/Domain/Entities/Product";
 import mongoose, { Document, Schema } from "mongoose";
 
 export type ProductMongooseDocument = Document & IProductDomain
@@ -23,3 +24,7 @@ const ProductSchema: any = new Schema({
         required: true
     }
 })
+
+ProductSchema.loadClass(Product)
+
+export default ProductSchema
