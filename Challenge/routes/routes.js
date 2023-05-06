@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 
 export const router = new Router();
-import {getAllProducts, newProduct} from '../controllers/product.controller.js';
+import {getAllProducts, getProductsByCategory, newProduct} from '../controllers/product.controller.js';
 import {getAllCategories, newCategory} from '../controllers/category.controller.js';
 
 router.get('/', (ctx)=>{
@@ -9,6 +9,7 @@ router.get('/', (ctx)=>{
 })
 
 router.get('/products', getAllProducts);
+router.get('/products/category/:title', getProductsByCategory);
 router.post('/products', newProduct);
 
 router.get('/categories', getAllCategories);

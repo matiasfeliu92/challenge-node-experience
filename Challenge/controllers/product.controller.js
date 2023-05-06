@@ -13,6 +13,22 @@ export const getAllProducts = async(ctx) => {
   }
 }
 
+export const getProductsByCategory = async (ctx) => {
+  try {
+    const categoryTitle = ctx.params.title;
+    const category = await Category.findOne({ title: categoryTitle }).exec();
+
+    if (category.enable === false) {
+      ctx.throw(404, `Category ${categoryTitle} disabled`);
+    }
+
+    const products = await Product.find({ category: category._id }).populate('category').exec();
+    ctx.body = products;
+  } catch (error) {
+    ctx.throw(error.status || 500, error.message);
+  }
+};
+
 export const newProduct = async (ctx) => {
     try {
       let categId;
