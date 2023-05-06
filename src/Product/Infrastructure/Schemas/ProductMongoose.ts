@@ -1,6 +1,10 @@
-import mongoose from 'mongoose'
+import { IProductDomain } from "Product/Domain/Entities/IProductDomain";
+import Product from "Product/Domain/Entities/Product";
+import mongoose, { Document, Schema } from "mongoose";
 
-const productSchema = new mongoose.Schema({
+export type ProductMongooseDocument = Document & IProductDomain
+
+const ProductSchema: any = new Schema({
     title: {
         type: String,
         required: true,
@@ -21,4 +25,6 @@ const productSchema = new mongoose.Schema({
     }
 })
 
-export const Product = mongoose.model('Product', productSchema)
+ProductSchema.loadClass(Product)
+
+export default ProductSchema
