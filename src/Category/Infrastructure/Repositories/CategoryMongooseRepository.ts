@@ -42,9 +42,9 @@ class CategoryMongooseRepository extends BaseMongooseRepository<ICategoryDomain,
         return new MongoosePaginator(queryBuilder, criteria);
     }
 
-    async create(product: ICategoryDomain): Promise<ICategoryDomain>
+    async create(category: ICategoryDomain): Promise<ICategoryDomain>
     {
-        const productDocument = new this.repository(product);
+        const productDocument = new this.repository(category);
         const createdProduct = await productDocument.save();
         return createdProduct.toObject();
     }
