@@ -3,7 +3,7 @@ import ICriteria from '../../../Shared/Presentation/Requests/ICriteria';
 import IPaginator from '../../../Shared/Infrastructure/Orm/IPaginator';
 
 import IProductRepository from './IProductRepository';
-// import ProductFilter from '../../Presentation/Criterias/ProductFilter';
+import ProductFilter from '../../Presentation/Criterias/ProductFilter';
 import MongoosePaginator from '../../../Shared/Infrastructure/Orm/MongoosePaginator';
 
 import BaseMongooseRepository from '../../../Shared/Infrastructure/Repositories/BaseMongooseRepository';
@@ -23,20 +23,36 @@ class ProductMongooseRepository extends BaseMongooseRepository<IProductDomain, P
         const queryBuilder: Query<ProductMongooseDocument[], ProductMongooseDocument> = this.repository.find();
         const filter = criteria.getFilter();
 
-        if (filter.has(ProductFilter.NAME))
+        if (filter.has(ProductFilter.TITLE))
         {
-            const name: string = filter.get(ProductFilter.NAME) as string;
+            const name: string = filter.get(ProductFilter.TITLE) as string;
             const rSearch = new RegExp(name, 'g');
 
-            void queryBuilder.where(ProductFilter.NAME).regex(rSearch);
+            void queryBuilder.where(ProductFilter.TITLE).regex(rSearch);
         }
 
         if (filter.has(ProductFilter.PRICE))
         {
-            const price: number = filter.get(ProductFilter.PRICE) as number;
-            const operator: string = filter.get(ProductFilter.PRICE_OPERATOR) as string;
+            const price: string = filter.get(ProductFilter.PRICE) as string;
+            const operator: number = filter.get(ProductFilter.PRICE) as number;
 
             void queryBuilder.where(ProductFilter.PRICE)[operator](price);
+        }
+
+        if (filter.has(ProductFilter.ENABLE))
+        {
+            const enable: string = filter.get(ProductFilter.ENABLE) as string;
+            const operator: number = filter.get(ProductFilter.ENABLE) as number;
+
+            void queryBuilder.where(ProductFilter.ENABLE)[operator](enable);
+        }
+
+        if (filter.has(ProductFilter.CATEGORY))
+        {
+            const category: string = filter.get(ProductFilter.CATEGORY) as string;
+            const operator: number = filter.get(ProductFilter.ENABLE) as number;
+
+            void queryBuilder.where(ProductFilter.CATEGORY)[operator](category);
         }
 
         void queryBuilder.populate(this.populate);
@@ -51,18 +67,18 @@ class ProductMongooseRepository extends BaseMongooseRepository<IProductDomain, P
         return createdProduct.toObject();
     }
 
-    async update(product: IProductDomain): Promise<IProductDomain>
-    {
-        const { id, ...rest } = product;
-        const updatedProduct = await this.repository.findOneAndUpdate({ _id: id }, rest, { new: true });
-        return updatedProduct.toObject();
-    }
+    // async update(product: IProductDomain): Promise<IProductDomain>
+    // {
+    //     const { id, ...rest } = product;
+    //     const updatedProduct = await this.repository.findOneAndUpdate({ _id: id }, rest, { new: true });
+    //     return updatedProduct.toObject();
+    // }
 
-    async delete(id: string): Promise<boolean>
-    {
-        const result = await this.repository.deleteOne({ _id: id });
-        return result.deletedCount === 1;
-    }
+    // async delete(id: string): Promise<boolean>
+    // {
+    //     const result = await this.repository.deleteOne({ _id: id });
+    //     return result.deletedCount === 1;
+    // }
 }
 
 export default ProductMongooseRepository;
