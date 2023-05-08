@@ -67,3 +67,5 @@ CategoryKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_UPDAT
 
     void await responder.send(category, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.UPDATED));
 });
+
+export default CategoryKoaHandler

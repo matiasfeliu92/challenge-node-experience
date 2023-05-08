@@ -67,3 +67,5 @@ ProductKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_UPDATE
 
     void await responder.send(product, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.UPDATED));
 });
+
+export default ProductKoaHandler
