@@ -13,6 +13,13 @@ class Permissions
     static readonly ITEMS_LIST: string = 'itemsList';
     static readonly ITEMS_DELETE: string = 'itemsDelete';
 
+    // PRODUCTS
+    static readonly PRDDUCTS_SAVE: string = 'productsSave';
+    static readonly PRDDUCTS_UPDATE: string = 'productsUpdate';
+    static readonly PRDDUCTS_SHOW: string = 'productsShow';
+    static readonly PRDDUCTS_LIST: string = 'productsList';
+    static readonly PRDDUCTS_DELETE: string = 'productsDelete';
+
     // USERS
     static readonly USERS_SAVE: string = 'usersSave';
     static readonly USERS_UPDATE: string = 'usersUpdate';
