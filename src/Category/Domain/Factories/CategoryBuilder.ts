@@ -12,7 +12,7 @@ class CategoryBuilder {
 
     setCategory(category?: ICategoryDomain)
     {
-        this._category = Category ?? new Category();
+        this._category = category ?? new Category();
 
         return this;
     }
@@ -28,6 +28,13 @@ class CategoryBuilder {
     create()
     {
         this._category.createdBy = this._payload.createdBy;
+        this._category.lastModifiedBy = this._payload.createdBy;
+
+        return this._category;
+    }
+
+    update()
+    {
         this._category.lastModifiedBy = this._payload.createdBy;
 
         return this._category;

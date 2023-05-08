@@ -41,26 +41,6 @@ class CategoryMongooseRepository extends BaseMongooseRepository<ICategoryDomain,
 
         return new MongoosePaginator(queryBuilder, criteria);
     }
-
-    async create(category: ICategoryDomain): Promise<ICategoryDomain>
-    {
-        const productDocument = new this.repository(category);
-        const createdProduct = await productDocument.save();
-        return createdProduct.toObject();
-    }
-
-    // async update(product: IProductDomain): Promise<IProductDomain>
-    // {
-    //     const { id, ...rest } = product;
-    //     const updatedProduct = await this.repository.findOneAndUpdate({ _id: id }, rest, { new: true });
-    //     return updatedProduct.toObject();
-    // }
-
-    // async delete(id: string): Promise<boolean>
-    // {
-    //     const result = await this.repository.deleteOne({ _id: id });
-    //     return result.deletedCount === 1;
-    // }
 }
 
 export default CategoryMongooseRepository;

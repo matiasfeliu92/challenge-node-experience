@@ -12,7 +12,7 @@ class ProductBuilder {
 
     setProduct(product?: IProductDomain)
     {
-        this._product = Product ?? new Product();
+        this._product = product ?? new Product();
 
         return this;
     }
@@ -28,6 +28,13 @@ class ProductBuilder {
     create()
     {
         this._product.createdBy = this._payload.createdBy;
+        this._product.lastModifiedBy = this._payload.createdBy;
+
+        return this._product;
+    }
+
+    update()
+    {
         this._product.lastModifiedBy = this._payload.createdBy;
 
         return this._product;
