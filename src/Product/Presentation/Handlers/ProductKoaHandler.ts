@@ -14,6 +14,7 @@ import ResponseMessageEnum from 'Shared/Domain/Enum/ResponseMessageEnum';
 import IdPayload from 'Shared/Presentation/Requests/IdPayload';
 import ProductUpdatePayload from 'Product/Domain/Payloads/ProductUpdatePayload';
 import Permissions from 'Config/Permissions';
+import CategoryPayload from 'Shared/Presentation/Requests/CategoryPayload';
 
 const routerOpts: Router.IRouterOptions = {
     prefix: '/api/products'
@@ -24,7 +25,7 @@ const responder: KoaResponder = new KoaResponder();
 const controller: ProductController = new ProductController();
 const config = MainConfig.getInstance().getConfig().statusCode;
 
-ProductKoaHandler.get('/products', AuthorizeKoaMiddleware(Permissions.PRODUCTS_LIST), async(ctx: DefaultContext) =>
+ProductKoaHandler.get('/', AuthorizeKoaMiddleware(Permissions.PRODUCTS_LIST), async(ctx: DefaultContext) =>
 {
     const data: CriteriaPayload = {
         url: ctx.request.url,
@@ -38,12 +39,19 @@ ProductKoaHandler.get('/products', AuthorizeKoaMiddleware(Permissions.PRODUCTS_L
 
 ProductKoaHandler.get('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_SHOW), async(ctx: DefaultContext) =>
 {
-    const product = await controller.getOne(ctx.params);
+    const product = await controller.getOne(ctx.params as IdPayload);
 
     void await responder.send(product, ctx, config['HTTP_OK'], new ProductTransformer());
 });
 
-ProductKoaHandler.post('/products', AuthorizeKoaMiddleware(Permissions.PRODUCTS_SAVE), async(ctx: DefaultContext) =>
+ProductKoaHandler.get('/:category', AuthorizeKoaMiddleware(Permissions.PRODUCTS_SHOW), async(ctx: DefaultContext) =>
+{
+    const product = await controller.getByCategory(ctx.params as CategoryPayload);
+
+    void await responder.send(product, ctx, config['HTTP_OK'], new ProductTransformer());
+});
+
+ProductKoaHandler.post('/', AuthorizeKoaMiddleware(Permissions.PRODUCTS_SAVE), async(ctx: DefaultContext) =>
 {
     const data: ProductRepPayload = {
         authUser: AuthUser(ctx),

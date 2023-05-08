@@ -20,6 +20,8 @@ import UpdateProductUseCase from "Product/Domain/UseCases/UpdateProductUseCase";
 import ProductPayload from "Shared/Presentation/Requests/ProductPayload";
 import IdPayload from "Shared/Presentation/Requests/IdPayload";
 import RemoveProductsUseCase from "Product/Domain/UseCases/RemoveProductUseCase";
+import CategoryPayload from "Shared/Presentation/Requests/CategoryPayload";
+import GetProductsByCategoryUserCase from "Product/Domain/UseCases/GetProductsByCategoryUseCase";
 
 class ProductController {
     public async list(payload: CriteriaPayload): Promise<IPaginator> {
@@ -35,11 +37,19 @@ class ProductController {
         return await useCase.handle(requestCriteria);
     }
 
-    public async getOne(payload: ProductPayload): Promise<IProductDomain>
+    public async getOne(payload: IdPayload): Promise<IProductDomain>
     {
         await ValidatorSchema.handle(IdSchemaValidation, payload);
 
         const useCase = new GetProductsUserCase();
+        return await useCase.handle(payload);
+    }
+
+    public async getByCategory(payload: CategoryPayload): Promise<IProductDomain>
+    {
+        await ValidatorSchema.handle(IdSchemaValidation, payload);
+
+        const useCase = new GetProductsByCategoryUserCase();
         return await useCase.handle(payload);
     }
 
