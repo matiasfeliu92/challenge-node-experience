@@ -4,5 +4,7 @@ import IBaseDomain from "Shared/Domain/Entities/IBaseDomain";
 
 export interface ICategoryDomain extends IBaseDomain {
     title: string;
-    enable: boolean
+    enable: boolean;
+    createdBy: IUserDomain;
+    lastModifiedBy: IUserDomain;
 }

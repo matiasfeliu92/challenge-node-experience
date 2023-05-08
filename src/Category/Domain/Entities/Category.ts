@@ -6,6 +6,8 @@ import ItemRepPayload from "Item/Domain/Payloads/ItemRepPayload";
 class Category extends Base implements ICategoryDomain {
     title: string;
     enable: boolean;
+    createdBy: IUserDomain;
+    lastModifiedBy: IUserDomain;
     
     constructor()
     {
