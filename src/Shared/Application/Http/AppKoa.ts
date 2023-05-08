@@ -17,6 +17,8 @@ import UserKoaHandler from '../../../Auth/Presentation/Handlers/UserKoaHandler';
 import NotificationKoaHandler from '../../../Notification/Presentation/Handlers/NotificationKoaHandler';
 import FileKoaHandler from '../../../File/Presentation/Handlers/FileKoaHandler';
 import AuthKoaHandler from '../../../Auth/Presentation/Handlers/AuthKoaHandler';
+import ProductKoaHandler from 'Product/Presentation/Handlers/ProductKoaHandler';
+import CategoryKoaHandler from 'Category/Presentation/Handlers/CategoryKoaHandler';
 import IAppConfig from './IAppConfig';
 import WhiteListKoaHandler from '../../Tests/WhiteListKoaHandler';
 import { ErrorKoaHandler } from './ErrorKoaHandler';
@@ -89,6 +91,12 @@ class AppKoa implements IApp
 
         this.app.use(ItemKoaHandler.routes());
         this.app.use(ItemKoaHandler.allowedMethods());
+
+        this.app.use(CategoryKoaHandler.routes());
+        this.app.use(CategoryKoaHandler.allowedMethods());
+
+        this.app.use(ProductKoaHandler.routes());
+        this.app.use(ProductKoaHandler.allowedMethods());
 
         this.app.use(RoleKoaHandler.routes());
         this.app.use(RoleKoaHandler.allowedMethods());
