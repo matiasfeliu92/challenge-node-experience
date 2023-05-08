@@ -25,7 +25,7 @@ const controller: CategoryController = new CategoryController();
 const config = MainConfig.getInstance().getConfig().statusCode;
 
 
-CategoryKoaHandler.get('/category', AuthorizeKoaMiddleware(Permissions.CATEGORY_LIST), async(ctx: DefaultContext) =>
+CategoryKoaHandler.get('/', AuthorizeKoaMiddleware(Permissions.CATEGORY_LIST), async(ctx: DefaultContext) =>
 {
     const data: CriteriaPayload = {
         url: ctx.request.url,
@@ -44,7 +44,7 @@ CategoryKoaHandler.get('/:id', AuthorizeKoaMiddleware(Permissions.CATEGORY_SHOW)
     void await responder.send(category, ctx, config['HTTP_OK'], new CategoryTransformer());
 });
 
-CategoryKoaHandler.post('/category', AuthorizeKoaMiddleware(Permissions.CATEGORY_SAVE), async(ctx: DefaultContext) =>
+CategoryKoaHandler.post('/', AuthorizeKoaMiddleware(Permissions.CATEGORY_SAVE), async(ctx: DefaultContext) =>
 {
     const data: CategoryRepPayload = {
         authUser: AuthUser(ctx),
