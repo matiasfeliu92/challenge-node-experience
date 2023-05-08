@@ -59,26 +59,6 @@ class ProductMongooseRepository extends BaseMongooseRepository<IProductDomain, P
 
         return new MongoosePaginator(queryBuilder, criteria);
     }
-
-    async create(product: IProductDomain): Promise<IProductDomain>
-    {
-        const productDocument = new this.repository(product);
-        const createdProduct = await productDocument.save();
-        return createdProduct.toObject();
-    }
-
-    // async update(product: IProductDomain): Promise<IProductDomain>
-    // {
-    //     const { id, ...rest } = product;
-    //     const updatedProduct = await this.repository.findOneAndUpdate({ _id: id }, rest, { new: true });
-    //     return updatedProduct.toObject();
-    // }
-
-    // async delete(id: string): Promise<boolean>
-    // {
-    //     const result = await this.repository.deleteOne({ _id: id });
-    //     return result.deletedCount === 1;
-    // }
 }
 
 export default ProductMongooseRepository;
