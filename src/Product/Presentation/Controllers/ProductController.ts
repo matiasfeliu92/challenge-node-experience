@@ -11,7 +11,13 @@ import ProductSort from "../Criterias/ProductSort";
 import { IProductDomain } from "Product/Domain/Entities/IProductDomain";
 import IdSchemaValidation from "Shared/Presentation/Validations/IdSchemaValidation";
 import GetProductsUserCase from "Product/Domain/UseCases/GetProductsUserCase";
-import CategoryPayload from "Shared/Presentation/Requests/CategoryPayload";
+import ProductRepPayload from "Product/Domain/Payloads/ProductRepPayload";
+import SaveProductsUseCase from "Product/Domain/UseCases/SaveProductsUseCase";
+import ProductSchemaSaveValidation from "../Validations/ProductSchemaSaveValidation";
+import ProductUpdatePayload from "Product/Domain/Payloads/ProductUpdatePayload";
+import ProductSchemaUpdateValidation from "../Validations/ProductSchemaUpdateValidation";
+import UpdateProductUseCase from "Product/Domain/UseCases/UpdateProductUseCase";
+import ProductPayload from "Shared/Presentation/Requests/ProductPayload";
 
 class ProductController {
     public async list(payload: CriteriaPayload): Promise<IPaginator> {
@@ -27,11 +33,27 @@ class ProductController {
         return await useCase.handle(requestCriteria);
     }
 
-    public async getOne(payload: CategoryPayload): Promise<IProductDomain>
+    public async getOne(payload: ProductPayload): Promise<IProductDomain>
     {
         await ValidatorSchema.handle(IdSchemaValidation, payload);
 
         const useCase = new GetProductsUserCase();
+        return await useCase.handle(payload);
+    }
+
+    public async save(payload: ProductRepPayload): Promise<IProductDomain>
+    {
+        await ValidatorSchema.handle(ProductSchemaSaveValidation, payload);
+
+        const useCase = new SaveProductsUseCase();
+        return await useCase.handle(payload);
+    }
+
+    public async update(payload: ProductUpdatePayload): Promise<IProductDomain>
+    {
+        await ValidatorSchema.handle(ProductSchemaUpdateValidation, payload);
+
+        const useCase = new UpdateProductUseCase();
         return await useCase.handle(payload);
     }
 }
