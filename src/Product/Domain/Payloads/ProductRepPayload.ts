@@ -1,3 +1,4 @@
+import IUserDomain from "Auth/Domain/Entities/IUserDomain";
 import Category from "Category/Domain/Entities/Category";
 
 interface ProductRepPayload {
@@ -5,6 +6,7 @@ interface ProductRepPayload {
     price: number,
     enable: boolean,
     category: Category,
+    createdBy: IUserDomain;
 }
 
 export default ProductRepPayload
