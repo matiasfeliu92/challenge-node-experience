@@ -14,19 +14,19 @@ class CategoryTransformer extends Transformer {
         this.userTransformer = new UserMinimalDataTransformer();
     }
 
-    public async transform(product: ICategoryDomain): Promise<ICategoryTransformer>
+    public async transform(category: ICategoryDomain): Promise<ICategoryTransformer>
     {
-        const createdBy = product.createdBy;
-        const lastModifiedBy = product.lastModifiedBy;
+        const createdBy = category.createdBy;
+        const lastModifiedBy = category.lastModifiedBy;
         dayjs.extend(utc);
         return {
-            id: product.getId(),
-            title: product.title,
-            enable: product.enable,
+            id: category.getId(),
+            title: category.title,
+            enable: category.enable,
             createdBy: createdBy ? await this.userTransformer.handle(createdBy) : null,
             lastModifiedBy: lastModifiedBy ? await this.userTransformer.handle(lastModifiedBy) : null,
-            createdAt: dayjs(product.createdAt).utc().unix(),
-            updatedAt: dayjs(product.updatedAt).utc().unix()
+            createdAt: dayjs(category.createdAt).utc().unix(),
+            updatedAt: dayjs(category.updatedAt).utc().unix()
         };
     }
 }
