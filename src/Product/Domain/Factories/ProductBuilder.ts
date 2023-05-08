@@ -32,6 +32,13 @@ class ProductBuilder {
 
         return this._product;
     }
+
+    update()
+    {
+        this._product.lastModifiedBy = this._payload.createdBy;
+
+        return this._product;
+    }
 }
 
 export default ProductBuilder

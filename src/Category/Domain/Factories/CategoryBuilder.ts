@@ -32,6 +32,13 @@ class CategoryBuilder {
 
         return this._category;
     }
+
+    update()
+    {
+        this._category.lastModifiedBy = this._payload.createdBy;
+
+        return this._category;
+    }
 }
 
 export default CategoryBuilder
