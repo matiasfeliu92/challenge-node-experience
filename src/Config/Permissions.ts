@@ -14,11 +14,18 @@ class Permissions
     static readonly ITEMS_DELETE: string = 'itemsDelete';
 
     // PRODUCTS
-    static readonly PRDDUCTS_SAVE: string = 'productsSave';
-    static readonly PRDDUCTS_UPDATE: string = 'productsUpdate';
-    static readonly PRDDUCTS_SHOW: string = 'productsShow';
-    static readonly PRDDUCTS_LIST: string = 'productsList';
-    static readonly PRDDUCTS_DELETE: string = 'productsDelete';
+    static readonly PRODUCTS_SAVE: string = 'productsSave';
+    static readonly PRODUCTS_UPDATE: string = 'productsUpdate';
+    static readonly PRODUCTS_SHOW: string = 'productsShow';
+    static readonly PRODUCTS_LIST: string = 'productsList';
+    static readonly PRODUCTS_DELETE: string = 'productsDelete';
+
+    // CATEGORY
+    static readonly CATEGORY_SAVE: string = 'categorySave';
+    static readonly CATEGORY_UPDATE: string = 'categoryUpdate';
+    static readonly CATEGORY_SHOW: string = 'categoryShow';
+    static readonly CATEGORY_LIST: string = 'categoryList';
+    static readonly CATEGORY_DELETE: string = 'categoryDelete';
 
     // USERS
     static readonly USERS_SAVE: string = 'usersSave';
@@ -63,6 +70,26 @@ class Permissions
                     Permissions.ITEMS_SHOW,
                     Permissions.ITEMS_LIST,
                     Permissions.ITEMS_DELETE
+                ]
+            },
+            {
+                group: 'PRODUCTS',
+                permissions: [
+                    Permissions.PRODUCTS_SAVE,
+                    Permissions.PRODUCTS_UPDATE,
+                    Permissions.PRODUCTS_SHOW,
+                    Permissions.PRODUCTS_LIST,
+                    Permissions.PRODUCTS_DELETE
+                ]
+            },
+            {
+                group: 'CATEGORY',
+                permissions: [
+                    Permissions.CATEGORY_SAVE,
+                    Permissions.CATEGORY_UPDATE,
+                    Permissions.CATEGORY_SHOW,
+                    Permissions.CATEGORY_LIST,
+                    Permissions.CATEGORY_DELETE
                 ]
             },
             {
