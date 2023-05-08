@@ -12,7 +12,7 @@ class CategoryBuilder {
 
     setCategory(category?: ICategoryDomain)
     {
-        this._category = Category ?? new Category();
+        this._category = category ?? new Category();
 
         return this;
     }

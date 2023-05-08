@@ -12,7 +12,7 @@ class ProductBuilder {
 
     setProduct(product?: IProductDomain)
     {
-        this._product = Product ?? new Product();
+        this._product = product ?? new Product();
 
         return this;
     }
