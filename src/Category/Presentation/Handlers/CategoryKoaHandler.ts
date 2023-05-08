@@ -51,12 +51,12 @@ CategoryKoaHandler.post('/category', AuthorizeKoaMiddleware(Permissions.CATEGORY
         ...ctx.request.body
     };
 
-    const product = await controller.save(data);
+    const category = await controller.save(data);
 
-    void await responder.send(product, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.CREATED));
+    void await responder.send(category, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.CREATED));
 });
 
-CategoryKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_UPDATE), async(ctx: DefaultContext) =>
+CategoryKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.CATEGORY_UPDATE), async(ctx: DefaultContext) =>
 {
     const data: CategoryUpdatePayload = {
         id: ctx.params.id,
