@@ -17,14 +17,14 @@ class UpdateCategoriesUseCase
 
     async handle(payload: CategoryUpdatePayload): Promise<ICategoryDomain>
     {
-        let product: ICategoryDomain = await this.repository.getOne(payload.id);
+        let category: ICategoryDomain = await this.repository.getOne(payload.id);
 
-        product = new CategoryBuilder(payload)
-            .setCategory(product)
+        category = new CategoryBuilder(payload)
+            .setCategory(category)
             .build()
             .update();
 
-        return await this.repository.update(product);
+        return await this.repository.update(category);
     }
 }
 
