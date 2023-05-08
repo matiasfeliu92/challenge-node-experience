@@ -1,10 +1,8 @@
 import { REPOSITORIES } from "Config/Injects";
 import IProductRepository from "Product/Infrastructure/Repositories/IProductRepository";
-import IdPayload from "Shared/Presentation/Requests/IdPayload";
 import { getRequestContext } from "Shared/Presentation/Shared/RequestContext";
 import { IProductDomain } from "../Entities/IProductDomain";
-import TitlePayload from "Shared/Presentation/Requests/TitlePayload";
-import CategoryPayload from "Shared/Presentation/Requests/CategoryPayload";
+import ProductPayload from "Shared/Presentation/Requests/ProductPayload";
 
 class GetProductsUserCase {
     private repository: IProductRepository
@@ -13,7 +11,7 @@ class GetProductsUserCase {
         this.repository = container.resolve<IProductRepository>(REPOSITORIES.IProductRepository);
     }
 
-    async handle(payload: CategoryPayload): Promise<IProductDomain>
+    async handle(payload: ProductPayload): Promise<IProductDomain>
     {
         if(payload.enable !== false)
         return await this.repository.getOne(payload.title);
