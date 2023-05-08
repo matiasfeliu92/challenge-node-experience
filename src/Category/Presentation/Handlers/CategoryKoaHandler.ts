@@ -13,6 +13,7 @@ import DefaultMessageTransformer from 'Shared/Presentation/Transformers/DefaultM
 import CategoryUpdatePayload from 'Category/Domain/Payloads/CategoryUpdatePayload';
 import Permissions from 'Config/Permissions';
 import ResponseMessageEnum from 'Shared/Domain/Enum/ResponseMessageEnum';
+import IdPayload from 'Shared/Presentation/Requests/IdPayload';
 
 const routerOpts: Router.IRouterOptions = {
     prefix: '/api/categories'
@@ -66,6 +67,13 @@ CategoryKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_UPDAT
     const category = await controller.update(data);
 
     void await responder.send(category, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.UPDATED));
+});
+
+CategoryKoaHandler.delete('/:id', AuthorizeKoaMiddleware(Permissions.CATEGORY_DELETE), async(ctx: DefaultContext) =>
+{
+    const category = await controller.remove(ctx.params as IdPayload);
+
+    void await responder.send(category, ctx, config['HTTP_CREATED'], new CategoryTransformer());
 });
 
 export default CategoryKoaHandler

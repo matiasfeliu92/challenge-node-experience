@@ -68,4 +68,11 @@ ProductKoaHandler.put('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_UPDATE
     void await responder.send(product, ctx, config['HTTP_CREATED'], new DefaultMessageTransformer(ResponseMessageEnum.UPDATED));
 });
 
+ProductKoaHandler.delete('/:id', AuthorizeKoaMiddleware(Permissions.PRODUCTS_DELETE), async(ctx: DefaultContext) =>
+{
+    const product = await controller.remove(ctx.params as IdPayload);
+
+    void await responder.send(product, ctx, config['HTTP_CREATED'], new ProductTransformer());
+});
+
 export default ProductKoaHandler
