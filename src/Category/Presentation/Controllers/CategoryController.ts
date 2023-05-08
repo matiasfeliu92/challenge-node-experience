@@ -18,6 +18,8 @@ import CategorySchemaUpdateValidation from "../Validations/CategorySchemaUpdateV
 import SaveCategoriesUseCase from "Category/Domain/UseCases/SaveCategoriesUseCase";
 import UpdateCategoriesUseCase from "Category/Domain/UseCases/UpdateCategoriesUseCase";
 import CategoryUpdatePayload from "Category/Domain/Payloads/CategoryUpdatePayload";
+import IdPayload from "Shared/Presentation/Requests/IdPayload";
+import RemoveCategoriesUseCase from "Category/Domain/UseCases/RemoveCategoryUseCase";
 
 class CategoryController {
     public async list(payload: CriteriaPayload): Promise<IPaginator> {
@@ -54,6 +56,14 @@ class CategoryController {
         await ValidatorSchema.handle(CategorySchemaUpdateValidation, payload);
 
         const useCase = new UpdateCategoriesUseCase();
+        return await useCase.handle(payload);
+    }
+
+    public async remove(payload: IdPayload): Promise<ICategoryDomain>
+    {
+        await ValidatorSchema.handle(IdSchemaValidation, payload);
+
+        const useCase = new RemoveCategoriesUseCase();
         return await useCase.handle(payload);
     }
 }

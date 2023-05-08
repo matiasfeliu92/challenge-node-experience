@@ -18,6 +18,8 @@ import ProductUpdatePayload from "Product/Domain/Payloads/ProductUpdatePayload";
 import ProductSchemaUpdateValidation from "../Validations/ProductSchemaUpdateValidation";
 import UpdateProductUseCase from "Product/Domain/UseCases/UpdateProductUseCase";
 import ProductPayload from "Shared/Presentation/Requests/ProductPayload";
+import IdPayload from "Shared/Presentation/Requests/IdPayload";
+import RemoveProductsUseCase from "Product/Domain/UseCases/RemoveProductUseCase";
 
 class ProductController {
     public async list(payload: CriteriaPayload): Promise<IPaginator> {
@@ -54,6 +56,14 @@ class ProductController {
         await ValidatorSchema.handle(ProductSchemaUpdateValidation, payload);
 
         const useCase = new UpdateProductUseCase();
+        return await useCase.handle(payload);
+    }
+
+    public async remove(payload: IdPayload): Promise<IProductDomain>
+    {
+        await ValidatorSchema.handle(IdSchemaValidation, payload);
+
+        const useCase = new RemoveProductsUseCase();
         return await useCase.handle(payload);
     }
 }
