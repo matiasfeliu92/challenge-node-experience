@@ -10,6 +10,7 @@ import IRoleDomain from "Auth/Domain/Entities/IRoleDomain";
 import IUserDomain from "Auth/Domain/Entities/IUserDomain";
 import User from "Auth/Domain/Entities/User";
 import Password from "Shared/Domain/ValueObjects/Password";
+import Category from "Category/Domain/Entities/Category";
 
 class ProductSeed extends BaseSeed
 {
@@ -31,8 +32,10 @@ class ProductSeed extends BaseSeed
 
         for await (const index of indexes)
         {
-            const name = faker.name.title();
-            const type = faker.datatype.number();
+            const title = faker.name.title();
+            const price = faker.datatype.number();
+            const enable = faker.datatype.boolean();
+            const category = Category;
 
             const item: IProductDomain = new ProductBuilder({ title, price, enable, category, createdBy: authUser })
                 .setProduct()

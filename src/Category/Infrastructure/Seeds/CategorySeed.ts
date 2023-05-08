@@ -32,8 +32,9 @@ class CategorySeed extends BaseSeed
 
         for await (const index of indexes)
         {
-            const name = faker.name.title();
-            const type = faker.datatype.number();
+            const title = faker.name.title();
+            const enable = faker.datatype.boolean();
+            const createdBy = faker.name.title();
 
             const item: ICategoryDomain = new CategoryBuilder({ title, enable, createdBy: authUser })
                 .setCategory()
