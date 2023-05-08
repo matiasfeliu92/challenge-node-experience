@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import UserMinimalDataTransformer from "Auth/Presentation/Transformers/UserMinimalDataTransformer";
 import { IProductDomain } from "Product/Domain/Entities/IProductDomain";
 import Transformer from "Shared/Presentation/Shared/Transformer";
@@ -27,8 +29,8 @@ class ProductTransformer extends Transformer {
                 category: product.category,
                 createdBy: createdBy ? await this.userTransformer.handle(createdBy) : null,
                 lastModifiedBy: lastModifiedBy ? await this.userTransformer.handle(lastModifiedBy) : null,
-                createdAt: dayjs(item.createdAt).utc().unix(),
-                updatedAt: dayjs(item.updatedAt).utc().unix()
+                createdAt: dayjs(product.createdAt).utc().unix(),
+                updatedAt: dayjs(product.updatedAt).utc().unix()
             };
         }
     }
